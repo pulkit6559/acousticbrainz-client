@@ -20,7 +20,8 @@ setup(
     package_data={'abz': ['default.conf']},
     scripts=['abzsubmit'],
     data_files=[('bin', ['streaming_extractor_music'])],
-    install_requires=['requests>2.4'],
+    install_requires=['requests>2.4',
+                      'pyopenssl>0.13', 'ndg-httpsclient>0.3.2', 'pyasn1>0.1.6'],
     license='GPL3+',
     classifiers=[
         "Development Status :: 3 - Alpha",

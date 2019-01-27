@@ -93,7 +93,18 @@ def submit_features(recordingid, features):
     featstr = json.dumps(features)
 
     host = config.settings["host"]
-    url = compat.urlunparse(('http', host, '/%s/low-level' % recordingid, '', '', ''))
+    if sys.version_info < (3, 0):
+        try:
+            import urllib3.contrib.pyopenssl
+            urllib3.contrib.pyopenssl.inject_into_urllib3()
+        except ImportError:
+            pass
+    if host[:10] == "localhost": 
+        url = compat.urlunparse(
+            ('http', host, '/%s/low-level' % recordingid, '', '', ''))
+    else:
+        url = compat.urlunparse(
+            ('https', host, '/%s/low-level' % recordingid, '', '', ''))
     r = requests.post(url, data=featstr)
     r.raise_for_status()
 
