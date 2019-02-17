@@ -99,7 +99,7 @@ def submit_features(recordingid, features):
             urllib3.contrib.pyopenssl.inject_into_urllib3()
         except ImportError:
             pass
-    if host[:10] == "localhost": 
+    if host[:9] == "localhost": 
         url = compat.urlunparse(
             ('http', host, '/%s/low-level' % recordingid, '', '', ''))
     else:
